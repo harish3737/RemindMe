@@ -632,7 +632,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RemindMe/Info.plist;
+				INFOPLIST_FILE = "RemindMe/App Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = RemindMe;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -661,7 +661,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RemindMe/Info.plist;
+				INFOPLIST_FILE = "RemindMe/App Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = RemindMe;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
