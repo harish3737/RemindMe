@@ -31,7 +31,7 @@ enum StringConstant {
     static let dontHaveAcc = "Don't have an account"
     static let password = "Password"
     static let passwordlength = "Password Must have Atleast 6 Characters."
-    static let loginVia = "Login Via"
+    static let loginVia = "Login"
     static let squareFill = "ic_square_fill"
     static let sqaureEmpty = "ic_square_empty"
     static let circleImage = "ic_circle"

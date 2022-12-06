@@ -17,21 +17,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         NotificationsManager.shared.setPermission()
         var vc : UIViewController!
-        let users = PresistentManager.shared.fetch(User.self)
-        
-        if users.count > 0{
+       
+ 
             
-            vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: StringConstant.HomeController) as! HomeController
-        }else{
-            vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: StringConstant.SplashController) as! SplashController
-        }
-         
-        let navigationController = UINavigationController(rootViewController: vc)
-        navigationController.navigationBar.isHidden = true
-        navigationController.navigationBar.tintColor = UIColor.white
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.makeKeyAndVisible()
-        self.window?.rootViewController = navigationController
+            if self.getLoginStatus() == 1{
+                
+                vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: StringConstant.HomeController) as! HomeController
+            }else{
+                vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: StringConstant.SplashController) as! SplashController
+            }
+            let navigationController = UINavigationController(rootViewController: vc)
+            navigationController.navigationBar.isHidden = true
+            navigationController.navigationBar.tintColor = UIColor.white
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            self.window?.makeKeyAndVisible()
+            self.window?.rootViewController = navigationController
+            
+        
+
+            
         
         return true
     }
@@ -95,6 +99,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    private func getLoginStatus()->Int{
+        
+        if let loginStatus = UserDefaults.standard.value(forKey: StringConstant.loginVia) as? Int{
+            return loginStatus
+        }
+        return 0
     }
 
 }

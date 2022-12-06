@@ -21,6 +21,7 @@ class HomeController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        noticesVal?.removeAll()
         self.getData()
     }
 
@@ -31,7 +32,7 @@ extension HomeController {
     private func intialLoads(){
         
         self.emailId = getEmail()
-        self.getData()
+//        self.getData()
         addNewNote.addShadow(radius: 3.0, color: .lightGray)
         addNewNote.backgroundColor = .appPrimaryColor
         addNewNote.centerImageView.imageTintColor(color1: .white)
@@ -48,6 +49,7 @@ extension HomeController {
         self.noticeCollection.register(nibName: StringConstant.NoticeCell)
     }
     private func getData(){
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = DateFormat.dd_mm_yyyy_hh_mm_ss_a
         let notice = PresistentManager.shared.fetch(Notice.self)
@@ -84,11 +86,8 @@ extension HomeController{
     }
     
     @objc func tapLogout(){
-        PresistentManager.shared.deleteAllData(User.self)
-        PresistentManager.shared.deleteAllData(Notice.self)
-        let domain = Bundle.main.bundleIdentifier!
-        UserDefaults.standard.removePersistentDomain(forName: domain)
-        UserDefaults.standard.synchronize()
+        
+        self.deleteDefaults()
         self.logoutImg.addPressAnimation()
         UIApplication.shared.windows.last?.rootViewController?.navigationController?.popViewController(animated: true)
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: StringConstant.SplashController) as! SplashController
@@ -134,6 +133,14 @@ extension HomeController : UICollectionViewDelegate,UICollectionViewDataSource,U
         vc.notice = self.noticesVal?[indexPath.item] ?? Notice()
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    private func deleteDefaults(){
+        let defaults = UserDefaults.standard
+        defaults.removeObject(forKey: StringConstant.loginVia)
+        defaults.removeObject(forKey: StringConstant.email)
+        UserDefaults.standard.synchronize()
+    }
+    
     
 }
 

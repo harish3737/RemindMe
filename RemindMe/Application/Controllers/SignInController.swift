@@ -141,6 +141,7 @@ extension SignInController {
             let checkUser:Bool = self.checkUser(emailId: emailTextField.text!.trimString(), password: passwordTextField.text!.trimString())
             if checkUser{
                 self.saveDefaults(emailId: emailTextField.text!.trimString())
+                self.saveLogin(login: 1)
                 let signinController = self.storyboard?.instantiateViewController(withIdentifier: StringConstant.HomeController) as! HomeController
                 signinController.navigationController?.setNavigationBarHidden(true, animated: false)
                 self.navigationController?.pushViewController(signinController, animated: true)
@@ -199,6 +200,11 @@ extension SignInController {
     private func saveDefaults(emailId:String){
         let defaults = UserDefaults.standard
         defaults.set(emailId, forKey: StringConstant.email)
+        UserDefaults.standard.synchronize()
+    }
+    private func saveLogin(login:Int){
+        let defaults = UserDefaults.standard
+        defaults.set(login, forKey: StringConstant.loginVia)
         UserDefaults.standard.synchronize()
     }
 }
